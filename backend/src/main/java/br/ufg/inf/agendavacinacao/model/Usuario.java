@@ -1,19 +1,22 @@
 package br.ufg.inf.agendavacinacao.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Entity
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @EqualsAndHashCode(of = "id")
-public class Alergia {
+public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
+    private String sexo;
+    private String estado;
+    private List<Alergia> alergias;
 }

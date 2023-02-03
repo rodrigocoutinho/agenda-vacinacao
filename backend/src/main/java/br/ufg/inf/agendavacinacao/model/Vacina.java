@@ -6,19 +6,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-
+@Slf4j
 @Data
-@Entity
 @EqualsAndHashCode(of = "id")
-public class Usuario {
+public class Vacina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-    private String sexo;
-    private String estado;
-    private List<Alergia> alergias;
+    private int doses;
+    private int periodicidade;
+    private int intervalo;
 }

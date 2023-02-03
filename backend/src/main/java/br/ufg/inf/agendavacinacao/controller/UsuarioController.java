@@ -1,6 +1,6 @@
 package br.ufg.inf.agendavacinacao.controller;
 
-import br.ufg.inf.agendavacinacao.model.Agenda;
+import br.ufg.inf.agendavacinacao.model.Usuario;
 import br.ufg.inf.agendavacinacao.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping
-    public List<Agenda> listarTodos() {
+    public List<Usuario> listarTodos() {
         return usuarioRepository.findAll();
     }
 

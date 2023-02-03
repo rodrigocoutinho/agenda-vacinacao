@@ -7,19 +7,13 @@ import lombok.EqualsAndHashCode;
 import java.sql.Date;
 
 @Data
-@Entity
-@EqualsAndHashCode(of = "id")
 public class Agenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Embedded
     private Vacina vacina;
-
-    @Embedded
     private Usuario usuario;
-
     private Date data;
 
     @Enumerated(EnumType.STRING)
