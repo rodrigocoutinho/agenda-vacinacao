@@ -16,7 +16,7 @@ public class AlergiaController {
     @Autowired
     private AlergiaRepository alergiaRepository;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Alergia> listarTodas() {
         return alergiaRepository.findAll();
     }
