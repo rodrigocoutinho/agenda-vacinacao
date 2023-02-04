@@ -8,14 +8,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
+
 @Slf4j
 @Data
 @EqualsAndHashCode(of = "id")
-public class Vacina {
+@Entity
+public class Vacina implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String titulo;
+    private String descricao;
     private int doses;
     private int periodicidade;
     private int intervalo;
