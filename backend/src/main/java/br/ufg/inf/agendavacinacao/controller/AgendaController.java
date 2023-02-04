@@ -1,5 +1,6 @@
 package br.ufg.inf.agendavacinacao.controller;
 
+import br.ufg.inf.agendavacinacao.dto.request.AgendaRequest;
 import br.ufg.inf.agendavacinacao.model.Agenda;
 import br.ufg.inf.agendavacinacao.model.Usuario;
 import br.ufg.inf.agendavacinacao.repository.AgendaRepository;
@@ -27,8 +28,22 @@ public class AgendaController {
 
     @PostMapping
     public ResponseEntity<Agenda> cadastrarAgenda(@RequestBody Agenda agenda) {
-        Agenda AgendaSalva = agendaRepository.save(agenda);
-        return ResponseEntity.status(HttpStatus.CREATED).body(AgendaSalva);
+        Agenda agendaSalva = agendaRepository.save(agenda);
+        return ResponseEntity.status(HttpStatus.CREATED).body(agendaSalva);
+    }
+
+    @PostMapping
+    public ResponseEntity<Agenda> baixar(@PathVariable Long id, @RequestBody AgendaRequest agendaRequest) {
+        Optional<Agenda> agendaSalva = agendaRepository.findById(id);
+        if(agendaSalva.isPresent()){
+            Agenda agendaAtualizada = agendaSalva.get();
+            agendaAtualizada.setSituacao(agendaRequest.getSituacao());
+            agendaAtualizada.setDataSituacao(agendaRequest.getDataSituacao());
+            agendaAtualizada.setObservacoes(agendaRequest.getObservacoes());
+            return new ResponseEntity<>(agendaRepository.save(agendaAtualizada), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 
