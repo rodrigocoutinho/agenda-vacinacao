@@ -5,6 +5,7 @@ import br.ufg.inf.agendavacinacao.model.Agenda;
 import br.ufg.inf.agendavacinacao.model.Usuario;
 import br.ufg.inf.agendavacinacao.repository.AgendaRepository;
 import br.ufg.inf.agendavacinacao.service.AgendaService;
+import jakarta.persistence.PostUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class AgendaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(agendaSalva);
     }
 
-    @PostMapping
+    @PutMapping
     public ResponseEntity<Agenda> baixar(@PathVariable Long id, @RequestBody AgendaRequest agendaRequest) {
         Optional<Agenda> agendaSalva = agendaRepository.findById(id);
         if(agendaSalva.isPresent()){

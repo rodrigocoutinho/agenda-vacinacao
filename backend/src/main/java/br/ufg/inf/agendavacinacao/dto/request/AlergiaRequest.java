@@ -1,7 +1,7 @@
 package br.ufg.inf.agendavacinacao.dto.request;
 
 
-public class Alergia {
+public class AlergiaRequest {
 
     private String nome;
 

@@ -1,6 +1,5 @@
 package br.ufg.inf.agendavacinacao.controller;
 
-import br.ufg.inf.agendavacinacao.model.Agenda;
 import br.ufg.inf.agendavacinacao.model.Alergia;
 import br.ufg.inf.agendavacinacao.repository.AlergiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,8 @@ public class AlergiaController {
     }
 
     @PostMapping
-    public ResponseEntity<Alergia> cadastrarAgenda(@RequestBody Alergia alergia) {
-        Alergia alergiaSalva = alergiaRepository.save(alergia);
+    public ResponseEntity<Alergia> cadastrarAgenda(@RequestBody Alergia nome) {
+        Alergia alergiaSalva = alergiaRepository.save(nome);
         return ResponseEntity.status(HttpStatus.CREATED).body(alergiaSalva);
     }
 
