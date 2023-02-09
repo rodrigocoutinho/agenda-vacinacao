@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -40,9 +40,24 @@ const User = () => {
   const [msg, setMsg] = useState('');
   const navigate = useNavigate();
   const theme = useTheme();
-  const [alergias, setAlergia] = useState([]);
+  const [alergiasExibir, setAlergiasExibir] = useState([]);
+  const [alergias, setAlergias] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
 
   async function Register() {
+
+
 
     const response = await axios.post(`${server}/usuario`, {
       nome: nome,
@@ -55,21 +70,18 @@ const User = () => {
       cidade: cidade,
       uf: uf
     })
-    navigate('/');
-    const bodyResponse = await response.json();
-    console.log(bodyResponse.body);
+    if (response.status >= 200 && response.status <= 300) {
+      console.log(response.body);
+      navigate('/');
+    } else {
+      console.log(response.body);
+      console.log("ERRO");
+    }
+
+
   }
 
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      },
-    },
-  };
+
 
   function getStyles(name, alergias, theme) {
     return {
@@ -84,11 +96,27 @@ const User = () => {
     const {
       target: { value },
     } = event;
-    setAlergia(
+    setAlergias(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
   };
+
+  useEffect(() => {
+
+    const getAlergiasExibir = async () => {
+      setLoading(true);
+
+      let response = await axios.get(`${server}/alergia`)
+      setLoading(false);
+      console.log(response.data)
+      return setAlergiasExibir(response.data);
+    }
+
+    getAlergiasExibir();
+
+
+  }, [])
 
 
   return (
@@ -141,7 +169,11 @@ const User = () => {
                 <RadioGroup
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="Sexo"
+                  name="sexo"
+                  id="sexo"
+                  label="sexo"
+                  value={sexo}
+                  onChange={(e) => setSexo(e.target.value)}
                 >
                   <FormControlLabel value="M" control={<Radio />} label="Masculino" />
                   <FormControlLabel value="F" control={<Radio />} label="Feminino" />
@@ -169,11 +201,11 @@ const User = () => {
                   )}
                   MenuProps={MenuProps}
                 >
-                  {alergias.map((name) => (
+                  {alergiasExibir.map((id, name) => (
                     <MenuItem
                       key={name}
                       value={name}
-                      style={getStyles(name, alergias, theme)}
+                      style={getStyles(name, alergiasExibir, theme)}
                     >
                       {name}
                     </MenuItem>

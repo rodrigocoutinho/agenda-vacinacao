@@ -66,6 +66,7 @@ const Alergia = () => {
 
       let response = await axios.get(`${server}/alergia`)
       setLoading(false);
+      console.log(response.data)
       return setAlergias(response.data);
     }
 
@@ -85,14 +86,16 @@ const Alergia = () => {
     })
     if (response.status >= 200 && response.status <= 300) {
       
-      navigate('/alergia');
+        Navegar();
     } else {
       console.log("ERRO");
     }
   }
 
   function Navegar() {
-    navigate('/alergia');
+    setTimeout(() => {  console.log("Cadastrada com sucesso!"); }, 5000);
+    window.location.reload(false);
+    navigate('/alergias');
   }
 
   return (

@@ -99,17 +99,13 @@ const Vacina = () => {
 
 
   }, [])
-  const linhas = vacinas.map(({ idRelatorio, nome, id, idLeito, co2, ruido, luminosidade, temperatura, tvoc, umidade }) => ({
-    nome: nome,
-    id: idRelatorio,
-    idLeito: idLeito,
-    co2: co2,
-    ruidoSonoro: ruido,
-    luminosidade: luminosidade,
-    temperatura: temperatura,
-    tvoc: tvoc,
-    umidade: umidade,
-    key: idRelatorio
+  const linhas = vacinas.map(({ id, titulo, descricao, doses, periodicidade, intervalo}) => ({
+    id: id,
+    titulo: titulo,
+    descricao: descricao,
+    doses: doses,
+    periodicidade: periodicidade,
+    intervalo: intervalo,
   }));
 
   async function Cadastrar() {
@@ -117,18 +113,20 @@ const Vacina = () => {
       titulo: titulo,
       descricao: descricao,
       doses: doses,
-      periodidicdade: periodicidade,
+      periodicidade: periodicidade,
       intervalo: intervalo
     })
     if (response.status >= 200 && response.status <= 300) {
       
-      navigate('/vacina');
+      Navegar();
     } else {
       console.log("ERRO");
     }
   }
 
   function Navegar() {
+    setTimeout(() => {  console.log("Cadastrada com sucesso!"); }, 5000);
+    window.location.reload(false);
     navigate('/vacina');
   }
 

@@ -20,7 +20,7 @@ const Wellcome = () => {
             <Typography variant="body2" gutterBottom sx={{textAlign: 'justify'}}>
               Primeiramente precisamos adicionar novos agendamentos.
             </Typography>
-            <Button variant="contained" sx={{marginTop:2}} onClick={()=>{navigate("/leitoform")}}>Definir Agenda</Button>
+            <Button variant="contained" sx={{marginTop:2}} onClick={()=>{navigate("/agenda")}}>Definir Agenda</Button>
       </Container>
     );
 }

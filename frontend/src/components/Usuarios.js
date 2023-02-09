@@ -73,23 +73,23 @@ const Usuarios = () => {
     const [msg, setMsg] = useState('');
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    let [vacinas, setVacinas] = useState([]);
+    let [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
 
-        const getVacinas = async () => {
+        const getUsuarios = async () => {
             setLoading(true);
 
-            let response = await axios.get(`${server}/vacina`)
+            let response = await axios.get(`${server}/usuario`)
             setLoading(false);
-            return setVacinas(response.data);
+            return setUsuarios(response.data);
         }
 
-        getVacinas();
+        getUsuarios();
 
 
     }, [])
-    const linhas = vacinas.map(({ id, nome, dataNascimento, sexo, alergias, logradouro, numero, setor, cidade, uf }) => ({
+    const linhas = usuarios.map(({ id, nome, dataNascimento, sexo, alergias, logradouro, numero, setor, cidade, uf }) => ({
         id: id,
         nome: nome,
         dataNascimento: dataNascimento,
