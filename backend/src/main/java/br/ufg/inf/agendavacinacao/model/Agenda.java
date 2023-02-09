@@ -16,15 +16,19 @@ public class Agenda implements Serializable {
 
     @NonNull
     @Column(nullable = false)
+    private Date data;
+
+    @NonNull
+    @Column(nullable = false)
+    private String hora;
+
+    @NonNull
+    //@Column(nullable = false)
     private Vacina vacina;
 
     @NonNull
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private Usuario usuario;
-
-    @NonNull
-    @Column(nullable = false)
-    private Date data;
 
     @NonNull
     @Column(nullable = false)

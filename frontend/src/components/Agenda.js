@@ -58,9 +58,9 @@ const Agenda = () => {
             width: 30,
         },
         {
-            field: 'date',
+            field: 'data',
             headerName: 'Data',
-            type: 'date',
+            //type: 'date',
             width: 100,
         },
         {
@@ -86,7 +86,7 @@ const Agenda = () => {
         {
             dataSituacao: 'dataSituacao',
             headerName: 'Data da Situação',
-            type: 'date',
+            //type: 'date',
             width: 150,
         },
         {
@@ -252,7 +252,7 @@ const Agenda = () => {
                                 onChange={(e) => setVacina(e.target.value)}
                             >
                                 {vacinas.map((data) => (
-                                    <MenuItem value={vacina}>{data.titulo}</MenuItem>
+                                    <MenuItem key={data.id} value={data.titulo}>{data.titulo}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
